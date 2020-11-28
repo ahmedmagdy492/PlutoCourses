@@ -40,5 +40,16 @@ namespace DAL.Repository
             }
             return new List<Course>();
         }
+
+        public IEnumerable<Tag> GetUserPreferedTags(string userId)
+        {
+            var user = GetUserById(userId);
+
+            if(user != null)
+            {
+                return user.Tags.ToList();
+            }
+            return new List<Tag>();
+        }
     }
 }

@@ -7,17 +7,17 @@
 <section id="hero">
 
     <div style="width: 100%;">
-        @using (Html.BeginForm("Login", "Auth", null, FormMethod.Post, new { @class = "row", style="width: 20%;margin: 120px  auto;padding: 15px;border-radius: 8px;border: 1px solid #ddd" }))
+        @using (Html.BeginForm("Login", "Auth", null, FormMethod.Post, new { @class = "row", style="width: 20%;margin: 120px  auto;padding: 15px;border-radius: 8px;border: 1px solid #ddd", id="frmLogin" }))
         {
         <fieldset data-aos="zoom-out" style="color: #fff">
             <legend>Login</legend>
             <div class="form-group">
                 @Html.LabelFor(m => m.Username, new { id = "username" })
-                @Html.TextBoxFor(m => m.Username, new { @class = "form-control", id = "username", type = "email" })
+                @Html.TextBoxFor(m => m.Username, new { @class = "form-control", id = "username", type = "email", required="" })
             </div>
             <div class="form-group">
                 @Html.LabelFor(m => m.Password, new { id = "password" })
-                @Html.TextBoxFor(m => m.Password, new { id = "password", @class = "form-control", type = "password" })
+                @Html.TextBoxFor(m => m.Password, new { id = "password", @class = "form-control", type = "password", required="" })
             </div>
             <button type="submit" class="btn btn-get-started">Login</button>
 

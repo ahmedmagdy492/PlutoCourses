@@ -39,27 +39,82 @@
 <body>
 
     <!-- ======= Header ======= -->
-    <header id="header" class="fixed-top d-flex align-items-center header-transparent">
-        <div class="container d-flex align-items-center">
+    @if (Request.Path.Contains("Home/Index"))
+    {
+        <header id="header" class="fixed-top d-flex align-items-center header-transparent">
+            <div class="container d-flex align-items-center">
 
-            <div class="logo mr-auto">
-                <h1 class="text-light">
-                    @Html.ActionLink("Pluto Courses", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                </h1>
-                <!-- Uncomment below if you prefer to use an image logo -->
-                <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+                <div class="logo mr-auto">
+                    <h1 class="text-light">
+                        @Html.ActionLink("Pluto Courses", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    </h1>
+
+                    <!-- Uncomment below if you prefer to use an image logo -->
+                    <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+                </div>
+
+                <nav class="nav-menu d-none d-lg-block">
+                    <ul>
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+                            <li>@Html.ActionLink("Home", "Index", "Home", null, new { @class = "active" })</li>
+                            <li>@Html.ActionLink("Login", "Login", "Auth")</li>
+                            <li>@Html.ActionLink("Register", "Register", "Auth")</li>
+                        }
+                        else
+                        {
+                            <li>@Html.ActionLink("My Courses", "MyCourses", "User", null, new { @class = "active" })</li>
+                            <li>@Html.ActionLink(User.Identity.Name, "Index", "User")</li>
+                            <li>@Html.ActionLink("Log out", "Logout", "Auth")</li>
+                        }
+                    </ul>
+                </nav><!-- .nav-menu -->
+
             </div>
+        </header><!-- End Header -->
+    }
+    else
+    {
+        <header id="header" class="fixed-top d-flex align-items-center">
+            <div class="container d-flex align-items-center">
 
-            <nav class="nav-menu d-none d-lg-block">
-                <ul>
-                    <li>@Html.ActionLink("Home", "Index", "Home", null, new { @class = "active" })</li>
-                    <li>@Html.ActionLink("Login", "Login", "Auth")</li>
-                    <li>@Html.ActionLink("Register", "Register", "Auth")</li>
-                </ul>
-            </nav><!-- .nav-menu -->
+                <div class="logo mr-auto">
+                    <h1 class="text-light">
+                        @Html.ActionLink("Pluto Courses", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    </h1>
+                </div>
 
-        </div>
-    </header><!-- End Header -->
+                <nav class="nav-menu d-none d-lg-block">
+                    <ul>
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+                            <li>@Html.ActionLink("Home", "Index", "Home", null, new { @class = "active" })</li>
+                            <li>@Html.ActionLink("Login", "Login", "Auth")</li>
+                            <li>@Html.ActionLink("Register", "Register", "Auth")</li>
+                        }
+                        else
+                        {
+                            <li class="drop-down">
+                                <a href="#">Categories</a>
+                                <ul>
+                                    <li>@Html.ActionLink("Programming", "", "")</li>
+                                    <li>@Html.ActionLink("Network & Security", "", "")</li>
+                                    <li>@Html.ActionLink("Web Development", "", "")</li>
+                                    <li>@Html.ActionLink("Design", "", "")</li>
+                                    <li>@Html.ActionLink("Web Design", "", "")</li>
+                                </ul>
+                            </li>
+                            <li>@Html.ActionLink("Cart", "Cart", "Auth")</li>
+                            <li>@Html.ActionLink("My Courses", "MyCourses", "User", null, new { @class = "active" })</li>
+                            <li>@Html.ActionLink(User.Identity.Name, "Index", "User")</li>
+                            <li>@Html.ActionLink("Log out", "Logout", "Auth")</li>
+                        }
+                    </ul>
+                </nav><!-- .nav-menu -->
+
+            </div>
+        </header><!-- End Header -->
+    }
 
     <main id="main">
 
@@ -151,7 +206,6 @@
     <script src="~/Content/assets/vendor/jquery/jquery.min.js"></script>
     <script src="~/Content/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/Content/assets/vendor/jquery.easing/jquery.easing.min.js"></script>
-    <script src="~/Content/assets/vendor/php-email-form/validate.js"></script>
     <script src="~/Content/assets/vendor/venobox/venobox.min.js"></script>
     <script src="~/Content/assets/vendor/waypoints/jquery.waypoints.min.js"></script>
     <script src="~/Content/assets/vendor/counterup/counterup.min.js"></script>

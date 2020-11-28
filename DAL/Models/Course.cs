@@ -14,6 +14,7 @@ namespace DAL.Models
         public float Price { get; set; }
         public int CategoryId { get; set; }
         public string AuthorId { get; set; }
+        public string BannerImgUrl { get; set; }
 
         public User User { get; set; }
         public Category Category { get; set; }

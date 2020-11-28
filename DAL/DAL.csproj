@@ -67,6 +67,10 @@
     <Compile Include="Migrations\202011280019571_changedPasswordLengthTo300.designer.cs">
       <DependentUpon>202011280019571_changedPasswordLengthTo300.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011281211585_addedImgColumnToCoursesTable.cs" />
+    <Compile Include="Migrations\202011281211585_addedImgColumnToCoursesTable.designer.cs">
+      <DependentUpon>202011281211585_addedImgColumnToCoursesTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Course.cs" />
@@ -99,6 +103,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011280019571_changedPasswordLengthTo300.resx">
       <DependentUpon>202011280019571_changedPasswordLengthTo300.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011281211585_addedImgColumnToCoursesTable.resx">
+      <DependentUpon>202011281211585_addedImgColumnToCoursesTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

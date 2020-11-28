@@ -5,7 +5,6 @@ using PlutoCourses.Services;
 using PlutoCourses.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
@@ -32,6 +31,12 @@ namespace PlutoCourses.Controllers
         [HttpGet]
         public ActionResult Login()
         {
+            if (User.Identity.IsAuthenticated)
+                return RedirectToAction("Index", "User");
+
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            Response.Cache.SetNoStore();
+
             var model = new LoginViewModel();
             return View(model);
         }
@@ -63,17 +68,18 @@ namespace PlutoCourses.Controllers
             identity.AddClaims(
                 new List<Claim>
                 {
-                    new Claim(ClaimTypes.Email, model.Username),
-                    new Claim(ClaimTypes.Name, user.Name)
+                    new Claim(ClaimTypes.Email, user.Name),
+                    new Claim(ClaimTypes.Name, user.Username)
                 }
             );
 
             HttpContext.GetOwinContext().Authentication.SignIn(identity);
 
-            return RedirectToAction("Profile", "User");
+            return RedirectToAction("Index", "Course");
         }
 
-        [HttpPost]
+        [Authorize]
+        [HttpGet]
         public ActionResult Logout()
         {
             HttpContext.GetOwinContext().Authentication.SignOut("CookieAuthentication");
@@ -83,6 +89,12 @@ namespace PlutoCourses.Controllers
         [HttpGet]
         public ActionResult Register()
         {
+            if (User.Identity.IsAuthenticated)
+                return RedirectToAction("Index", "User");
+
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            Response.Cache.SetNoStore();
+
             var model = new RegisterViewModel();
             return View(model);
         }
@@ -117,7 +129,20 @@ namespace PlutoCourses.Controllers
             _userRepository.RegisterUser(user);
             _unitOfWork.Save();
 
-            return RedirectToAction("Login");
+            // logging in the user automatically
+
+            var identity = new ClaimsIdentity("CookieAuthentication");
+            identity.AddClaims(
+                new List<Claim>
+                {
+                    new Claim(ClaimTypes.Email, user.Name),
+                    new Claim(ClaimTypes.Name, user.Username)
+                }
+            );
+
+            HttpContext.GetOwinContext().Authentication.SignIn(identity);
+
+            return RedirectToAction("Index", "User");
         }
     }
 }

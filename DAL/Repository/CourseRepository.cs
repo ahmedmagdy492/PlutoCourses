@@ -17,7 +17,7 @@ namespace DAL.Repository
 
         public IEnumerable<Course> GetCourses()
         {
-            return _context.Courses.ToList();
+            return _context.Courses.Include("User").Include("Category").ToList();
         }
 
         public IEnumerable<Course> GetCoursesOfCategory(int CategoryId)
