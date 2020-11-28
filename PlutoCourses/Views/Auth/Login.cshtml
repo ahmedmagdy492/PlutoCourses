@@ -1,0 +1,51 @@
+﻿@model PlutoCourses.ViewModels.LoginViewModel
+@{
+    ViewBag.Title = "Login";
+}
+
+<!-- ======= Hero Section ======= -->
+<section id="hero">
+
+    <div style="width: 100%;">
+        @using (Html.BeginForm("Login", "Auth", null, FormMethod.Post, new { @class = "row", style="width: 20%;margin: 120px  auto;padding: 15px;border-radius: 8px;border: 1px solid #ddd" }))
+        {
+        <fieldset data-aos="zoom-out" style="color: #fff">
+            <legend>Login</legend>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Username, new { id = "username" })
+                @Html.TextBoxFor(m => m.Username, new { @class = "form-control", id = "username", type = "email" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Password, new { id = "password" })
+                @Html.TextBoxFor(m => m.Password, new { id = "password", @class = "form-control", type = "password" })
+            </div>
+            <button type="submit" class="btn btn-get-started">Login</button>
+
+            <div style="margin: 20px">
+                @Html.ValidationSummary()
+            </div>
+
+        </fieldset>
+        }
+    </div>
+
+    <svg class="hero-waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28 " preserveAspectRatio="none">
+        <defs>
+            <path id="wave-path" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z">
+            </path>
+        </defs>
+        <g class="wave1">
+            <use xlink:href="#wave-path" x="50" y="3" fill="rgba(255,255,255, .1)">
+            </use>
+        </g>
+        <g class="wave2">
+            <use xlink:href="#wave-path" x="50" y="0" fill="rgba(255,255,255, .2)">
+            </use>
+        </g>
+        <g class="wave3">
+            <use xlink:href="#wave-path" x="50" y="9" fill="#fff">
+            </use>
+        </g>
+    </svg>
+
+</section><!-- End Hero -->

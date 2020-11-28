@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30320.27
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlutoCourses", "PlutoCourses\PlutoCourses.csproj", "{B97CCB6B-8D84-452D-A429-682B63F6C6B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{196BC178-12BD-4F7F-85CA-5362CD73B801}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B97CCB6B-8D84-452D-A429-682B63F6C6B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B97CCB6B-8D84-452D-A429-682B63F6C6B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B97CCB6B-8D84-452D-A429-682B63F6C6B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B97CCB6B-8D84-452D-A429-682B63F6C6B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{196BC178-12BD-4F7F-85CA-5362CD73B801}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{196BC178-12BD-4F7F-85CA-5362CD73B801}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{196BC178-12BD-4F7F-85CA-5362CD73B801}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{196BC178-12BD-4F7F-85CA-5362CD73B801}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5BB6FD53-3AA2-4446-BD87-E61A40BFAB37}
+	EndGlobalSection
+EndGlobal
