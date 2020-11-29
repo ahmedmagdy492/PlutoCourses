@@ -19,7 +19,7 @@
                     @Html.LabelFor(m => m.Password, new { id = "password" })
                     @Html.TextBoxFor(m => m.Password, new { id = "password", @class = "form-control", type = "password", required = "" })
                 </div>
-                <button type="submit" class="btn btn-get-started">Login</button>
+                <button type="submit" style="width: 100%" class="btn btn-get-started">Login</button>
 
                 <div style="margin: 20px">
                     @Html.ValidationSummary()
@@ -54,6 +54,5 @@
 @section scripts{
     <script>
         document.querySelector("#username").focus();
-        alert("here");
     </script>
 }

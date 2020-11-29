@@ -22,12 +22,12 @@ namespace DAL.Repository
 
         public IEnumerable<Course> GetCoursesOfCategory(int CategoryId)
         {
-            return _context.Courses.Where(c => c.CategoryId == CategoryId).ToList();
+            return _context.Courses.Include("User").Include("Category").Where(c => c.CategoryId == CategoryId).ToList();
         }
 
         public IEnumerable<Course> GetCoursesOfAuthor(string authorId)
         {
-            return _context.Courses.Where(c => c.AuthorId == authorId);
+            return _context.Courses.Include("User").Include("Category").Where(c => c.AuthorId == authorId);
         }
 
         public IEnumerable<Course> GetCoursesOfTag(string tagId)

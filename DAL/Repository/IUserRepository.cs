@@ -10,5 +10,6 @@ namespace DAL.Repository
         User GetUserById(string id);
         User GetUserByUsername(string username);
         User RegisterUser(User user);
+        bool Update(User user);
     }
 }

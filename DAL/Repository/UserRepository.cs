@@ -30,6 +30,19 @@ namespace DAL.Repository
             return _context.Users.Add(user);
         }
 
+        public bool Update(User user)
+        {
+            try
+            {
+                _context.Entry(user).State = System.Data.Entity.EntityState.Modified;
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
         public IEnumerable<Course> GetCoursesUserEnrolledIn(string userId)
         {
             var user = GetUserById(userId);

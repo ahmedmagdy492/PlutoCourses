@@ -98,17 +98,28 @@
                                 <a href="#">Categories</a>
                                 <ul>
                                     <li>@Html.ActionLink("All", "Index", "Course")</li>
-                                    <li>@Html.ActionLink("Programming", "Index", "Course", new { category= "Programming" }, null)</li>
+                                    <li>@Html.ActionLink("Programming", "Index", "Course", new { category = "Programming" }, null)</li>
                                     <li>@Html.ActionLink("Network & Security", "", "")</li>
                                     <li>@Html.ActionLink("Web Development", "", "")</li>
                                     <li>@Html.ActionLink("Design", "", "")</li>
                                     <li>@Html.ActionLink("Web Design", "", "")</li>
                                 </ul>
                             </li>
-                            <li>@Html.ActionLink("Cart", "Cart", "Auth")</li>
-                            <li>@Html.ActionLink("My Courses", "MyCourses", "Course", null, new { @class = "active" })</li>
                             <li>@Html.ActionLink(User.Identity.Name, "Index", "User")</li>
-                            <li>@Html.ActionLink("Log out", "Logout", "Auth")</li>
+                            <li style="display: flex !important">
+                                <a href="/Auth/Cart">
+                                    <img src="~/Content/Images/ic_cart.png" style="width: 25px;height: 25px" title="Cart" />
+                                </a>
+                            </li>
+                            <li class="drop-down">
+                                <a href="#">
+                                    <img src="~/Content/Images/ic_setting.png" style="width: 25px;height: 25px;" />
+                                </a>
+                                <ul>
+                                    <li>@Html.ActionLink("My Courses", "MyCourses", "Course", null, new { @class = "active" })</li>
+                                    <li>@Html.ActionLink("Log out", "Logout", "Auth")</li>
+                                </ul>
+                            </li>
                         }
                     </ul>
                 </nav><!-- .nav-menu -->

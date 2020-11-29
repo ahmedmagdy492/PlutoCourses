@@ -177,8 +177,11 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\CoursesViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\ModelDataViewModel.cs" />
     <Compile Include="ViewModels\ProfileViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
+    <Compile Include="ViewModels\SearchViewModel.cs" />
+    <Compile Include="ViewModels\UserProfileDataViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\assets\css\style.css" />
@@ -255,6 +258,8 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\courseImage.jpg" />
+    <Content Include="Content\Images\ic_cart.png" />
+    <Content Include="Content\Images\ic_setting.png" />
     <Content Include="Content\Images\user-image.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -317,11 +322,13 @@
     <Content Include="Views\Course\Index.cshtml" />
     <Content Include="Views\Shared\Components\CoursesComponent.cshtml" />
     <Content Include="Views\Course\MyCourses.cshtml" />
+    <Content Include="Views\Shared\Components\Modal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Videos\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Search\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -1,6 +1,6 @@
 ﻿@model PlutoCourses.ViewModels.ProfileViewModel
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = User.Identity.Name + " Profile";
 }
 
 <div class="container" style="width: 100%;margin: 120px">
@@ -11,10 +11,10 @@
         }
         else
         {
-            <img src="~/Content/Images/@Model.CurrentUser.ImageUrl" class="img-circle img-responsive img-thumbnail" style="border-radius: 50px;" id="profileImg" />
+            <img src="~/Content/Images/@Model.CurrentUser.ImageUrl" class="img-circle img-responsive img-thumbnail" style="border-radius: 50px;max-width:250px;" id="profileImg" />
         }
         <div>
-            <h3 style="margin: 30px;">@Model.CurrentUser.Name</h3>
+            <h3 style="margin: 30px;" id="usernameTxt">@Model.CurrentUser.Name</h3>
             <h5 style="margin-left: 30px;">Upload a Profile Image</h5>
             @Html.TextBoxFor(m => m.CurrentUser.ImageUrl, new { @class = "form-control", type = "file", style = "margin: 20px", id="imgFile", accept = "image/*" })
         </div>
@@ -24,31 +24,60 @@
         <button id="btnEdit" class="btn" style="margin-bottom: 50px;background: #191c93;color: #fff;width: 100%">Edit</button>
         <div class="form-group">
             @Html.LabelFor(m => m.CurrentUser.Name)
-            @Html.TextBoxFor(m => m.CurrentUser.Name, new { @class = "form-control", id = "name", disabled = ""})
+            @Html.TextBoxFor(m => m.CurrentUser.Name, new { @class = "form-control", id = "name", disabled = "", required=""})
         </div>
 
         <div class="form-group">
             @Html.LabelFor(m => m.CurrentUser.Username)
-            @Html.TextBoxFor(m => m.CurrentUser.Username, new { @class = "form-control", id = "username", disabled = "" })
+            @Html.TextBoxFor(m => m.CurrentUser.Username, new { @class = "form-control", id = "username", disabled = "", required= "", type="email" })
         </div>
     </div>
 
     <div class="container" style="margin: 100px auto;width: 50%;">
-        <button class="btn" style="background: #191c93;color: #fff;width: 100%">Save Changes</button>
+        <button id="btnSave" class="btn" disabled style="background: #191c93;color: #fff;width: 100%">Save Changes</button>
     </div>
 
 </div>
+
+@Html.Partial("Components/Modal", new PlutoCourses.ViewModels.ModelDataViewModel { Title = "Message", Message = "Message Content"})
 
 
 @section scripts{
     <script>
         const img = document.querySelector("#profileImg");
         const imgFile = document.querySelector("#imgFile");
+        const modalBodyContent = document.querySelector("#modalBodyContent");
 
-        imgFile.onchange = function (e) {
+        imgFile.oninput = function (e) {
             if (e.target.value.split('.')[1] != "png" && e.target.value.split('.')[1] != "jpg") {
-                alert("images can only be in png or jpg");
+                modalBodyContent.innerText = "images can only be in png or jpg";
+                $('#popup-modal').modal();
                 e.target.value = "";
+            }
+            else {
+                (function () {
+                    if (imgFile.files.length == 0) {
+                        modalBodyContent.innerText = "Please upload an image";
+                        $('#popup-modal').modal();
+                    }
+                    else {
+                        const formData = new FormData();
+                        formData.append("img", imgFile.files[0]);
+
+                        $.ajax({
+                            url: "User/UpdateProfileImage",
+                            type: "post",
+                            contentType: false,
+                            processData: false,
+                            data: formData,
+                            success: function (res) {
+                                img.src = "/Content/Images/" + res.url;
+                                modalBodyContent.innerText = "Profile Image Changed Successfully";
+                                $('#popup-modal').modal();
+                            }
+                        });
+                    }
+                })();
             }
         }
 
@@ -56,6 +85,39 @@
             $("#btnEdit").remove();
             $("#name").removeAttr("disabled");
             $("#username").removeAttr("disabled");
+        });
+
+        const userNameTxt = document.querySelector("#usernameTxt");
+        document.querySelector("#name").oninput = function () {
+            userNameTxt.innerText = document.querySelector("#name").value;
+            $("#btnSave").removeAttr("disabled");
+        }
+
+        document.querySelector("#username").oninput = function () {
+            $("#btnSave").removeAttr("disabled");
+        }
+
+        $("#btnSave").click(function () {
+            if ($("#name").val() != "" && $("#username").val() != "") {
+                var model = {
+                    Name: $("#name").val(),
+                    Username: $("#username").val()
+                }
+
+                $.ajax({
+                    url: "User/UpdateUserData",
+                    type: "post",
+                    data: model,
+                    success: function (msg) {
+                        modalBodyContent.innerText = msg.msg;
+                        $('#popup-modal').modal();
+                    }
+                });
+            }
+            else {
+                modalBodyContent.innerText = "Please Fill out the empty fields";
+                $('#popup-modal').modal();
+            }
         });
         
     </script>
