@@ -97,7 +97,8 @@
                             <li class="drop-down">
                                 <a href="#">Categories</a>
                                 <ul>
-                                    <li>@Html.ActionLink("Programming", "", "")</li>
+                                    <li>@Html.ActionLink("All", "Index", "Course")</li>
+                                    <li>@Html.ActionLink("Programming", "Index", "Course", new { category= "Programming" }, null)</li>
                                     <li>@Html.ActionLink("Network & Security", "", "")</li>
                                     <li>@Html.ActionLink("Web Development", "", "")</li>
                                     <li>@Html.ActionLink("Design", "", "")</li>
@@ -105,7 +106,7 @@
                                 </ul>
                             </li>
                             <li>@Html.ActionLink("Cart", "Cart", "Auth")</li>
-                            <li>@Html.ActionLink("My Courses", "MyCourses", "User", null, new { @class = "active" })</li>
+                            <li>@Html.ActionLink("My Courses", "MyCourses", "Course", null, new { @class = "active" })</li>
                             <li>@Html.ActionLink(User.Identity.Name, "Index", "User")</li>
                             <li>@Html.ActionLink("Log out", "Logout", "Auth")</li>
                         }

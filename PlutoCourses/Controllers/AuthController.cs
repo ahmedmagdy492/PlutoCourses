@@ -82,6 +82,8 @@ namespace PlutoCourses.Controllers
         [HttpGet]
         public ActionResult Logout()
         {
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            Response.Cache.SetNoStore();
             HttpContext.GetOwinContext().Authentication.SignOut("CookieAuthentication");
             return RedirectToAction("Login");
         }

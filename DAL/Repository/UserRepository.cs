@@ -36,7 +36,7 @@ namespace DAL.Repository
 
             if (user != null)
             {
-                return user.EnrolledCourses.ToList();
+                return user.EnrolledCourses;
             }
             return new List<Course>();
         }
@@ -47,7 +47,7 @@ namespace DAL.Repository
 
             if(user != null)
             {
-                return user.Tags.ToList();
+                return user.Tags;
             }
             return new List<Tag>();
         }

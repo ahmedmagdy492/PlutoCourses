@@ -15,6 +15,7 @@ namespace PlutoCourses.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ICourseRepository _courseRepository;
+        private readonly IUserRepository _userRepository;
 
         public CourseController(
             IUnitOfWork unitOfWork
@@ -22,16 +23,41 @@ namespace PlutoCourses.Controllers
         {
             _unitOfWork = unitOfWork;
             _courseRepository = _unitOfWork.CourseRepository;
+            _userRepository = _unitOfWork.UserRepository;
         }
 
         // GET: Course
-        public ActionResult Index()
+        [HttpGet]
+        public ActionResult Index(string categoryName)
         {
-            var model = new CoursesViewModel
+            CoursesViewModel model = null;
+            if (categoryName != null)
+            {
+                model = new CoursesViewModel
+                {
+                    Courses = _courseRepository.GetCourses().Where(c => c.Category.Name == categoryName).ToList()
+                };
+                return View(model);
+            }
+            
+            model = new CoursesViewModel
             {
                 Courses = _courseRepository.GetCourses()
             };
             return View(model);
+        }
+
+        [Authorize]
+        [HttpGet]
+        public ActionResult MyCourses()
+        {
+            var author = _userRepository.GetUserByUsername(User.Identity.Name);
+            var authorCourses = _courseRepository.GetCoursesOfAuthor(author.Id);
+            var coursesViewModel = new CoursesViewModel
+            {
+                Courses = authorCourses
+            };
+            return View(coursesViewModel);
         }
     }
 }

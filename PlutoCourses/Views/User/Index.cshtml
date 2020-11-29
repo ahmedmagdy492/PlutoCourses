@@ -1,7 +1,62 @@
-﻿
+﻿@model PlutoCourses.ViewModels.ProfileViewModel
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<div class="container" style="width: 100%;margin: 120px">
+    <div style="width: 50%;margin: auto; display: flex;align-items: center">
+        @if (Model.CurrentUser.ImageUrl == null)
+        {
+            <img src="~/Content/Images/user-image.jpg" class="img-circle img-responsive img-thumbnail" style="border-radius: 50px;" id="profileImg" />
+        }
+        else
+        {
+            <img src="~/Content/Images/@Model.CurrentUser.ImageUrl" class="img-circle img-responsive img-thumbnail" style="border-radius: 50px;" id="profileImg" />
+        }
+        <div>
+            <h3 style="margin: 30px;">@Model.CurrentUser.Name</h3>
+            <h5 style="margin-left: 30px;">Upload a Profile Image</h5>
+            @Html.TextBoxFor(m => m.CurrentUser.ImageUrl, new { @class = "form-control", type = "file", style = "margin: 20px", id="imgFile", accept = "image/*" })
+        </div>
+    </div>
 
+    <div class="container" style="margin: 50px auto;width: 50%;">
+        <button id="btnEdit" class="btn" style="margin-bottom: 50px;background: #191c93;color: #fff;width: 100%">Edit</button>
+        <div class="form-group">
+            @Html.LabelFor(m => m.CurrentUser.Name)
+            @Html.TextBoxFor(m => m.CurrentUser.Name, new { @class = "form-control", id = "name", disabled = ""})
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.CurrentUser.Username)
+            @Html.TextBoxFor(m => m.CurrentUser.Username, new { @class = "form-control", id = "username", disabled = "" })
+        </div>
+    </div>
+
+    <div class="container" style="margin: 100px auto;width: 50%;">
+        <button class="btn" style="background: #191c93;color: #fff;width: 100%">Save Changes</button>
+    </div>
+
+</div>
+
+
+@section scripts{
+    <script>
+        const img = document.querySelector("#profileImg");
+        const imgFile = document.querySelector("#imgFile");
+
+        imgFile.onchange = function (e) {
+            if (e.target.value.split('.')[1] != "png" && e.target.value.split('.')[1] != "jpg") {
+                alert("images can only be in png or jpg");
+                e.target.value = "";
+            }
+        }
+
+        $("#btnEdit").click(function () {
+            $("#btnEdit").remove();
+            $("#name").removeAttr("disabled");
+            $("#username").removeAttr("disabled");
+        });
+        
+    </script>
+}

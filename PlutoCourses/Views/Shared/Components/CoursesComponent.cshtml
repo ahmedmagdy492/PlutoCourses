@@ -9,28 +9,37 @@
         <div class="row">
             @foreach (var course in Model.Courses)
             {
-                <div class="col-sm-3" style="padding: 0 !important;box-shadow: 0 2px 4px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.08);margin: 20px;" data-aos="zoom-in" data-aos-delay="100">
-                    @if (!string.IsNullOrWhiteSpace(course.BannerImgUrl))
-                    {
-                        <img src="~/Content/Images/@course.BannerImgUrl" class="img-thumbnail img-responsive" />
-                    }
-                    else
-                    {
-                        <img src="~/Content/Images/courseImage.jpg" class="img-thumbnail img-responsive" style="padding: 0 !important;width: 100% !important;" />
-                    }
-                    <h5 style="text-align: center;padding: 10px;">@course.Name</h5>
-                    <ul style="list-style: none;margin-left: -40px; text-align: center;">
-                        <li>Author: @course.User.Name</li>
-                        <li>Duration: @course.Duration Hours</li>
-                        <li>Category: @course.Category.Name</li>
-                    </ul>
+            <div class="col-sm-3" style="padding: 0 !important;box-shadow: 0 2px 4px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.08);margin: 20px;" data-aos="zoom-in" data-aos-delay="100">
+                @if (!string.IsNullOrWhiteSpace(course.BannerImgUrl))
+                {
+                    <img src="~/Content/Images/@course.BannerImgUrl" class="img-thumbnail img-responsive" />
+                }
+                else
+                {
+                    <img src="~/Content/Images/courseImage.jpg" class="img-thumbnail img-responsive" style="padding: 0 !important;width: 100% !important;" />
+                }
+                <h5 style="text-align: center;padding: 10px;">@course.Name</h5>
+                <ul style="list-style: none;margin-left: -40px; text-align: center;">
+                    <li>Author: @course.User.Name</li>
+                    <li>Duration: @course.Duration Hours</li>
+                    <li>Category: @course.Category.Name</li>
+                </ul>
+                @if (User.Identity.Name != course.User.Username)
+                {
                     <a href="" class="btn-wrap" style="color: #fff;background: #191c93; display: flex; justify-content: center; padding: 10px">
                         Buy Now @course.Price$
                     </a>
                     <a href="" class="btn-wrap" style="margin-top: 5px;color: #fff;background: #191c93; display: flex; justify-content: center; padding: 10px">
                         <i class='bx bxs-cart-add' style="font-size: 20px;margin-right: 3px;margin-top: 3px"></i> Add to Cart
                     </a>
-                </div>
+                }
+                else
+                {
+                    <a href="" class="btn-wrap" style="color: #fff;background: #191c93; display: flex; justify-content: center; padding: 10px">
+                        Edit
+                    </a>
+                }
+            </div>
             }
         </div>
     }
